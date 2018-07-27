@@ -92,10 +92,6 @@ func (su *StatusUpdater) BulkUpdateIngressStatus(ings []v1beta1.Ingress) error {
 		glog.V(3).Info("no ingresses to update")
 		return nil
 	}
-	if len(su.status) < 1 {
-		glog.V(3).Info("no status to set")
-		return nil
-	}
 	failed := false
 	for _, ing := range ings {
 		err := su.updateIngressWithStatus(ing, su.status)
