@@ -412,7 +412,7 @@ func NewLoadBalancerController(input NewLoadBalancerControllerInput) *LoadBalanc
 func hasChanges(oldIng *extensions.Ingress, curIng *extensions.Ingress) bool {
 	oldIng.Status.LoadBalancer.Ingress = curIng.Status.LoadBalancer.Ingress
 	oldIng.ResourceVersion = curIng.ResourceVersion
-	return reflect.DeepEqual(oldIng, curIng)
+	return !reflect.DeepEqual(oldIng, curIng)
 }
 
 // Run starts the loadbalancer controller

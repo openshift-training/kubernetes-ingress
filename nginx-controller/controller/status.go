@@ -27,11 +27,11 @@ type StatusUpdater struct {
 }
 
 // UpdateManagedAndMergeableIngresses handles the full return format of LoadBalancerController.getManagedIngresses
-func (su *StatusUpdater) UpdateManagedAndMergeableIngresses(managedIngresses []v1beta1.Ingress, mExes map[string]*nginx.MergeableIngresses) error {
+func (su *StatusUpdater) UpdateManagedAndMergeableIngresses(managedIngresses []v1beta1.Ingress, mergableIngExes map[string]*nginx.MergeableIngresses) error {
 	ings := []v1beta1.Ingress{}
 	ings = append(ings, managedIngresses...)
-	for _, mEx := range mExes {
-		for _, minion := range mEx.Minions {
+	for _, mergableIngEx := range mergableIngExes {
+		for _, minion := range mergableIngEx.Minions {
 			ings = append(ings, *minion.Ingress)
 		}
 	}
